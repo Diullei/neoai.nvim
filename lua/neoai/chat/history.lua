@@ -21,7 +21,17 @@ function ChatHistory:new(model, params, context)
     self.params = params or {}
     self.messages = {}
 
-    if context ~= nil then
+    if config.options.prompts.context_prompt_list ~= nil then
+        local filetype = vim.api.nvim_buf_get_option(0, "filetype")
+
+        for _, context_prompt in ipairs(config.options.prompts.context_prompt_list(context, filetype)) do
+            local system_msg = {
+                role = context_prompt.role,
+                content = table.concat(context_prompt.content, "\n"),
+            }
+            table.insert(self.messages, system_msg)
+        end
+    elseif context ~= nil then
         local context_prompt = config.options.prompts.context_prompt(context)
         self:set_prompt(context_prompt)
     end
