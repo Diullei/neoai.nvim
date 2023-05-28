@@ -85,7 +85,7 @@ M.create_ui = function()
         buf_options = {
             -- modifiable = true,
             -- readonly = false,
-            filetype = "neoai-output",
+            filetype = "markdown",
         },
         -- win_options = {
         -- 	winblend = 10,
@@ -115,7 +115,7 @@ M.create_ui = function()
         buf_options = {
             modifiable = true,
             readonly = false,
-            filetype = "neoai-input",
+            filetype = "markdown",
         },
         win_options = {
             winblend = 0,
